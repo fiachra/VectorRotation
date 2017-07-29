@@ -1,22 +1,4 @@
-
-struct Vec3{
-	float x;
-	float y;
-	float z;
-};
-
-struct Rot3{
-	float yaw;
-	float pitch;
-	float roll;
-};
-
-enum RotationErrorCode{
-	REC_OK,
-	REC_POSITIONS_MATCH,
-	REC_INPUT_INVALID,
-	REC_NUM_ERROR_CODES
-};
+#include "Utilities.h"
 
 /*
  * Function:  ConvertToListenerSpace
@@ -32,4 +14,4 @@ enum RotationErrorCode{
  *  returns: Error Code REC_OK (0)
  */
 
-enum RotationErrorCode ConvertToListenerSpace(struct Vec3* objPos,struct  Vec3* listPos,struct  Rot3* listRot,struct  Vec3* objLSPos);
+RotationErrorCode ConvertToListenerSpace(Vec3* objPos, Vec3* listPos, Rot3* listRot, Vec3* objLSPos);
