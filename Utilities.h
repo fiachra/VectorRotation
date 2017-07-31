@@ -6,23 +6,35 @@
 #define DEG_TO_RAD(angleDegrees) (angleDegrees * PI / 180.0)
 #include <stdbool.h>
 
+/**
+ *  Simple Struct to store 3D Vector
+ */
 typedef struct vec3_t{
-	float x;
-	float y;
-	float z;
+	double x;
+	double y;
+	double z;
 }Vec3;
 
+/**
+ *  Simple Struct to store Euler rotation
+ */
 typedef struct rot3_t{
-	float roll;
-	float pitch;
-	float yaw;
+	double roll;
+	double pitch;
+	double yaw;
 }Rot3;
 
+/**
+ *  MxN matrix Struct
+ */
 typedef struct matrix_t{ 
 	int h, w; 
 	double *x;
 } Matrix;
 
+/**
+ *  Enumerated Errors
+ */
 typedef enum rotationErrorCode_t{
 	REC_OK,
 	REC_MAT_NONINVERTIBLE,
