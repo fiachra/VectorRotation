@@ -18,7 +18,9 @@ int main(){
 	listenerRot.pitch = 0;
 	listenerRot.yaw = 90;
 
-	ConvertToListenerSpace(&objectPos, &listenerPos , &listenerRot, NULL);
+	Vec3 objectLS;
+
+	ConvertToListenerSpace(&objectPos, &listenerPos , &listenerRot, &objectLS);
 
 	return 0;
 }
