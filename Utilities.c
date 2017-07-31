@@ -7,6 +7,10 @@ void printVec3(Vec3* v)
 	printf("X: %f Y: %f Z: %f\n", v->x,v->y,v->z);
 }
 
+void printRot3(Rot3* r)
+{
+	printf("Roll: %f Pitch: %f Yaw: %f\n", r->roll,r->pitch,r->yaw);
+}
 // Matrix manipulation code lifted from https://rosettacode.org/wiki/Matrix_multiplication#C
 double dot(double *a, double *b, int len, int step)
 {

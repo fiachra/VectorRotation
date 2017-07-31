@@ -42,7 +42,9 @@ typedef enum rotationErrorCode_t{
 	REC_NUM_ERROR_CODES
 }RotationErrorCode;
 
+// printing functions
 void printVec3(Vec3* v);
+void printRot3(Rot3* r);
 
 //Matrix Functions
 void matShow(Matrix* a);
