@@ -61,6 +61,7 @@ int main(){
 		{
 			printf("Result: FAILED\n\n");
 		}
+		count = count +3;
 	}
 
 	return 0;
