@@ -52,13 +52,14 @@ int main(){
 		printf("Object Calculated Position:");
 		printVec3(&objectPosLS);
 
-		if(err != REC_OK)
+		if(err == REC_OK && objectPosLSExpected.x == objectPosLS.x && objectPosLSExpected.y == objectPosLS.y && objectPosLSExpected.z == objectPosLS.z)
 		{
-			printf("Result: FAILED\n\n");
+			
+			printf("Result: PASSED\n\n");
 		}
 		else
 		{
-			printf("Result: PASSED\n\n");
+			printf("Result: FAILED\n\n");
 		}
 	}
 
