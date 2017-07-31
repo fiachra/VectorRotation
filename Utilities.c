@@ -72,6 +72,9 @@ bool getInverse4x4(Matrix* src, Matrix* dest)
     // Should check for 0 determinant
     double invdet = 1.0 / (s0 * c5 - s1 * c4 + s2 * c3 + s3 * c2 - s4 * c1 + s5 * c0);
 
+    if(invdet == 0)
+    	return false;
+    
     dest->x[(0*order)+0] = ( src->x[(1*order)+1] * c5 - src->x[(1*order)+2] * c4 + src->x[(1*order)+3] * c3) * invdet;
     dest->x[(0*order)+1] = (-src->x[(0*order)+1] * c5 + src->x[(0*order)+2] * c4 - src->x[(0*order)+3] * c3) * invdet;
     dest->x[(0*order)+2] = ( src->x[(3*order)+1] * s5 - src->x[(3*order)+2] * s4 + src->x[(3*order)+3] * s3) * invdet;

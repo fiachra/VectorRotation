@@ -1,11 +1,7 @@
 #define PI 3.14159265
 
 #define DEG_TO_RAD(angleDegrees) (angleDegrees * PI / 180.0)
-
-#define false 0
-#define true 1
-
-typedef int bool; // or #define bool int
+#include <stdbool.h>
 
 typedef struct vec3_t{
 	float x;
@@ -26,7 +22,7 @@ typedef struct matrix_t{
 
 typedef enum rotationErrorCode_t{
 	REC_OK,
-	REC_POSITIONS_MATCH,
+	REC_MAT_NONINVERTIBLE,
 	REC_INPUT_INVALID,
 	REC_NUM_ERROR_CODES
 }RotationErrorCode;
