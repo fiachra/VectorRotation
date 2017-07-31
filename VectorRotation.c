@@ -6,6 +6,7 @@
 RotationErrorCode ConvertToListenerSpace(Vec3* objPos,Vec3* listPos, Rot3* listRot,Vec3* objLSPos)
 {
 	Matrix *S1, *S2, *transformation, *transformationInv, *resultMat;
+	int percisionManagmentVal = 10000;
 
 	if(objPos == NULL || listPos == NULL || listRot == NULL || objLSPos == NULL)
 		return REC_INPUT_INVALID;
@@ -73,10 +74,10 @@ RotationErrorCode ConvertToListenerSpace(Vec3* objPos,Vec3* listPos, Rot3* listR
 	resultMat = matMul(transformationInv, &matObj);
 	//matShow(resultMat);
 
-	//copy output values to return object
-	objLSPos->x = resultMat->x[0];
-	objLSPos->y = resultMat->x[1];
-	objLSPos->z = resultMat->x[2];
+	//copy output values to return object and set percision to about 5 places
+	objLSPos->x = floorf(resultMat->x[0] * percisionManagmentVal) / percisionManagmentVal;
+	objLSPos->y = floorf(resultMat->x[1] * percisionManagmentVal) / percisionManagmentVal;
+	objLSPos->z = floorf(resultMat->x[2] * percisionManagmentVal) / percisionManagmentVal;
 
 	//Clean up
 	free(S1);
