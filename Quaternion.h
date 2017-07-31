@@ -1,3 +1,6 @@
+#ifndef QUATERNION_H
+#define QUATERNION_H
+
 #include <stdbool.h>
  
 typedef struct quaternion_t
@@ -17,3 +20,5 @@ void quaternionMul_d(Quaternion *r, Quaternion *q, double d);
 bool quaternionEqual(Quaternion *a, Quaternion *b);
 void quaternionMul(Quaternion *r, Quaternion *a, Quaternion *b);
 void quaternionPrint(Quaternion *q);
+
+#endif

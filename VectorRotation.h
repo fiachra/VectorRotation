@@ -1,3 +1,6 @@
+#ifndef VECTOR_ROTATION_H
+#define VECTOR_ROTATION_H
+
 #include "Utilities.h"
 
 /*
@@ -15,3 +18,5 @@
  */
 
 RotationErrorCode ConvertToListenerSpace(Vec3* objPos, Vec3* listPos, Rot3* listRot, Vec3* objLSPos);
+
+#endif
