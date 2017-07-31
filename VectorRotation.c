@@ -16,6 +16,7 @@ RotationErrorCode ConvertToListenerSpace(Vec3* objPos,Vec3* listPos, Rot3* listR
 	double yawRad = DEG_TO_RAD(listRot->yaw);
 
 	// encode translation and rotations as 4x4 transformation Matrices.
+	// Matrices are seperated to allow a change to the multiplication order if desired!
 	double translationData[] = {
 		1.0, 0, 0, listPos->x, 
 		0, 1.0, 0, listPos->y, 
@@ -70,7 +71,7 @@ RotationErrorCode ConvertToListenerSpace(Vec3* objPos,Vec3* listPos, Rot3* listR
 
 	//multiply object position by transformation to get final result 
 	resultMat = matMul(transformationInv, &matObj);
-	matShow(resultMat);
+	//matShow(resultMat);
 
 	//copy output values to return object
 	objLSPos->x = resultMat->x[0];
