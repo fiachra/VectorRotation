@@ -1,6 +1,7 @@
 #include "Utilities.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 void printVec3(Vec3* v)
 {
@@ -99,4 +100,45 @@ bool getInverse4x4(Matrix* src, Matrix* dest)
     dest->x[(3*order)+3] = ( src->x[(2*order)+0] * s3 - src->x[(2*order)+1] * s1 + src->x[(2*order)+2] * s0) * invdet;
 
     return true;
+}
+
+Quaternion *toQuaternion(Rot3 *r)
+{
+	double t0 = cos(DEG_TO_RAD(r->yaw) * 0.5);
+	double t1 = sin(DEG_TO_RAD(r->yaw) * 0.5);
+	double t2 = cos(DEG_TO_RAD(r->roll) * 0.5);
+	double t3 = sin(DEG_TO_RAD(r->roll) * 0.5);
+	double t4 = cos(DEG_TO_RAD(r->pitch) * 0.5);
+	double t5 = sin(DEG_TO_RAD(r->pitch) * 0.5);
+
+	double w = t0 * t2 * t4 + t1 * t3 * t5;
+	double x = t0 * t3 * t4 - t1 * t2 * t5;
+	double y = t0 * t2 * t5 + t1 * t3 * t4;
+	double z = t1 * t2 * t4 - t0 * t3 * t5;
+
+	return quaternionNewSet(w,x,y,z);
+}
+
+Rot3 toEulerianAngle(Quaternion* q)
+{
+	double ysqr = q->q[2] * q->q[2];
+	Rot3 r;
+
+	// roll (x-axis rotation)
+	double t0 = +2.0 * (q->q[0] * q->q[1] + q->q[2] * q->q[3]);
+	double t1 = +1.0 - 2.0 * (q->q[1] * q->q[1] + ysqr);
+	r.roll = RAD_TO_DEG(atan2(t0, t1));
+
+	// pitch (y-axis rotation)
+	double t2 = +2.0 * (q->q[0] * q->q[2] - q->q[3] * q->q[1]);
+	t2 = ((t2 > 1.0) ? 1.0 : t2);
+	t2 = ((t2 < -1.0) ? -1.0 : t2);
+	r.pitch = RAD_TO_DEG(asin(t2));
+
+	// yaw (z-axis rotation)
+	double t3 = +2.0 * (q->q[0] * q->q[3] + q->q[1] * q->q[2]);
+	double t4 = +1.0 - 2.0 * (ysqr + q->q[3] * q->q[3]);  
+	r.yaw = RAD_TO_DEG(atan2(t3, t4));
+
+	return r;
 }

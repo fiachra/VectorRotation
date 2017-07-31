@@ -4,7 +4,9 @@
 #define PI 3.14159265
 
 #define DEG_TO_RAD(angleDegrees) (angleDegrees * PI / 180.0)
+#define RAD_TO_DEG(angleRad) (angleRad * 180.0 / PI)
 #include <stdbool.h>
+#include "Quaternion.h"
 
 /**
  *  Simple Struct to store 3D Vector
@@ -51,5 +53,8 @@ void matShow(Matrix* a);
 Matrix* matMul(Matrix* a, Matrix* b);
 Matrix* matNew(int h, int w);
 bool getInverse4x4(Matrix* src, Matrix* dest);
+
+Quaternion *toQuaternion(Rot3 *r);
+Rot3 toEulerianAngle(Quaternion* q);
 
 #endif
