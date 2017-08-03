@@ -19,4 +19,6 @@
 
 RotationErrorCode ConvertToListenerSpace(Vec3* objPos, Vec3* listPos, Rot3* listRot, Vec3* objLSPos);
 
+RotationErrorCode ConvertToListenerSpaceQuat(Vec3* objPos, Vec3* listPos, Rot3* listRot, Vec3* objLSPos);
+
 #endif

@@ -6,7 +6,7 @@
 RotationErrorCode ConvertToListenerSpace(Vec3* objPos,Vec3* listPos, Rot3* listRot,Vec3* objLSPos)
 {
 	Matrix *S1, *S2, *transformation, *transformationInv, *resultMat;
-	int percisionManagmentVal = 10000;
+	int percisionManagmentVal = 1000;
 
 	if(objPos == NULL || listPos == NULL || listRot == NULL || objLSPos == NULL)
 		return REC_INPUT_INVALID;
@@ -87,4 +87,28 @@ RotationErrorCode ConvertToListenerSpace(Vec3* objPos,Vec3* listPos, Rot3* listR
 	free(resultMat);
 
 	return REC_OK;
+}
+
+RotationErrorCode ConvertToListenerSpaceQuat(Vec3* objPos, Vec3* listPos, Rot3* listRot, Vec3* objLSPos)
+{
+	Quaternion* listRotQ = toQuaternion(listRot);
+	Quaternion* objPosQ = quaternionNewSet(0,objPos->x - listPos->x,objPos->y - listPos->y, objPos->z - listPos->z);
+	Quaternion* listRotQConj = quaternionNew();
+	Quaternion* S1 = quaternionNew();
+	Quaternion* result = quaternionNew();
+
+	quaternionConj(listRotQConj, listRotQ);
+	
+	//quaternionMul(S1, listRotQ, objPosQ);
+	//quaternionMul(result, S1, listRotQConj);
+
+	quaternionMul(S1, objPosQ, listRotQ);
+	quaternionMul(result, listRotQConj, S1);
+
+	objLSPos->x = result->q[1];
+	objLSPos->y = result->q[2];
+	objLSPos->z = result->q[3];
+
+	return REC_OK;
+
 }
